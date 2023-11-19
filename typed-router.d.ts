@@ -39,12 +39,13 @@ import type {
 
 declare module 'vue-router/auto/routes' {
   export interface RouteNamedMap {
-    '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
-    '//': RouteRecordInfo<'//', '/', Record<never, never>, Record<never, never>>,
-    '//[...index]': RouteRecordInfo<'//[...index]', '/:index(.*)', { index: ParamValue<true> }, { index: ParamValue<false> }>,
-    '//[[name]]/': RouteRecordInfo<'//[[name]]/', '/:name?', { name?: ParamValueZeroOrOne<true> }, { name?: ParamValueZeroOrOne<false> }>,
-    '//about/': RouteRecordInfo<'//about/', '/about', Record<never, never>, Record<never, never>>,
-    '//no/': RouteRecordInfo<'//no/', '/no', Record<never, never>, Record<never, never>>,
+    'root-layout': RouteRecordInfo<'root-layout', '/', Record<never, never>, Record<never, never>>,
+    'home': RouteRecordInfo<'home', '/', Record<never, never>, Record<never, never>>,
+    'catch-all': RouteRecordInfo<'catch-all', '/:index(.*)', { index: ParamValue<true> }, { index: ParamValue<false> }>,
+    ':name?': RouteRecordInfo<':name?', '/:name?', { name?: ParamValueZeroOrOne<true> }, { name?: ParamValueZeroOrOne<false> }>,
+    'about': RouteRecordInfo<'about', '/about', Record<never, never>, Record<never, never>>,
+    'nested/url/path': RouteRecordInfo<'nested/url/path', '/nested/url/path', Record<never, never>, Record<never, never>>,
+    'no': RouteRecordInfo<'no', '/no', Record<never, never>, Record<never, never>>,
   }
 }
 

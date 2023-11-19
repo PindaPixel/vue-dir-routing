@@ -4,7 +4,8 @@ import { defineConfig } from "vite";
 import { configDefaults } from "vitest/config";
 import vue from "@vitejs/plugin-vue";
 import VueRouter from "unplugin-vue-router/vite";
-import { RouteRecordRaw } from "vue-router";
+
+let i = 0;
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -63,6 +64,24 @@ export default defineConfig({
                 if (route.path !== ":index(.*)") return;
 
                 route.components.set("default", "@/components/NotFound.vue");
+            },
+            getRouteName(node) {
+                const { components, path, pathSegment, rawSegment } = node.value;
+                console.log({
+                    components, path, pathSegment, rawSegment
+                })
+
+                const defaultComponent = components.get("default");
+
+                if (defaultComponent && defaultComponent.indexOf(".layout.vue") > -1) {
+                    if (path === "/") return "root-layout";
+                    // remove leading slash
+                    return path.slice(1) + "-layout"
+                }
+
+                if (path === "/") return "home";
+                
+                return path.slice(1).replace(":index(.*)", "catch-all");
             },
         }),
         vue(),
