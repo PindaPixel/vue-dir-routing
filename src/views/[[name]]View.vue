@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router/auto';
 
-const { name } = useRoute("//[name]/greeting/").params;
+const { name } = useRoute("//[[name]]/").params;
 </script>
 <template>
-    Hello {{ name }}
+    Hello {{ name || "Unnamed" }}
 </template>

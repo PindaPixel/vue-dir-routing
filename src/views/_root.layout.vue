@@ -21,7 +21,8 @@ import RouterErrorBoundary from "@/components/RouterErrorBoundary.vue";
                 <RouterLink to="/">Home</RouterLink>
                 <RouterLink to="/about">About</RouterLink>
                 <RouterLink to="/no">Unauthorized</RouterLink>
-                <RouterLink to="/xd">Not found</RouterLink>
+                <RouterLink to="/xd">Greeting</RouterLink>
+                <RouterLink to="/not/found">Not Found</RouterLink>
             </nav>
         </div>
     </header>
