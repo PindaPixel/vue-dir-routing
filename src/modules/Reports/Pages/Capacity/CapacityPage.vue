@@ -1,0 +1,1 @@
+<template>Capacity page</template>

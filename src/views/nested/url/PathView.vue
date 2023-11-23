@@ -1,3 +1,0 @@
-<template>
-    Hi xd
-</template>
