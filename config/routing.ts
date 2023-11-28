@@ -9,7 +9,7 @@ const routerFolders: [string, string][] = [
     ["", "src/modules/Base"],
     // ["/", "src/Modules/Home"],
     ["/check/reports", "src/modules/Reports/Pages"],
-    ["/account", "src/modules/Account/Pages"],
+    // ["/account", "src/modules/Account/Pages"],
 ];
 
 const routesFolder: RoutesFolder = routerFolders

@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import RouterViewErrorBoundary from "@/Router/Components/RouterViewErrorBoundary.vue";
+import RouterViewErrorBoundary from "@/router/components/RouterViewErrorBoundary.vue";
 </script>
 
 <template>
     Hello from reports layout
-    <RouterViewErrorBoundary />
+    <RouterViewErrorBoundary>
+    <template #error="{error}">
+        {{ error.message }}
+    </template>
+  </RouterViewErrorBoundary>
 </template>
