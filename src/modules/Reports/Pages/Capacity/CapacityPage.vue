@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CatFact from "../Components/CatFact.vue";
+import CatFact from "../../Components/CatFact.vue";
 import { UnauthorizedError } from '@/router/error';
 
 throw new UnauthorizedError("Access denied");
