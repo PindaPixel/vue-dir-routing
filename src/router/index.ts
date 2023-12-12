@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router/auto";
+import { viewTransitionSupported } from "../util/view-transition";
 
 // routes: [
 //     {
@@ -34,7 +35,16 @@ import { createRouter, createWebHistory } from "vue-router/auto";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
-    
+});
+
+router.beforeResolve(async () => {
+    if (viewTransitionSupported(document)) {
+        const viewTransition = document.startViewTransition(() => {
+
+        });
+
+        await viewTransition.ready;
+    }
 });
 
 export default router;

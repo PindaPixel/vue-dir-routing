@@ -5,11 +5,11 @@ import { useRouter } from "vue-router/auto";
 
 type RouteError = UnauthorizedError | NotFoundError;
 
-const caughtError = ref<RouteError | undefined>();
+const error = ref<RouteError | undefined>();
 
 onErrorCaptured((e) => {
     if (e instanceof UnauthorizedError || e instanceof NotFoundError) {
-        caughtError.value = e;
+        error.value = e;
         return false;
     }
 
@@ -17,11 +17,14 @@ onErrorCaptured((e) => {
 });
 
 useRouter().afterEach(() => {
-    caughtError.value = undefined;
+    error.value = undefined;
 });
-
 </script>
 <template>
-    <RouterView  v-if="!caughtError" />
-    <slot v-if="!!caughtError" name="error" :error="caughtError"></slot>
+    <RouterView v-if="!error" v-slot="{ Component }">
+        <slot name="default" :component="Component">
+            <component :is="Component" />
+        </slot>
+    </RouterView>
+    <slot v-if="error" name="error" :error="error" />
 </template>
