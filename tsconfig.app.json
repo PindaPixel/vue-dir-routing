@@ -5,6 +5,7 @@
     "compilerOptions": {
         "composite": true,
         "baseUrl": ".",
+        "module": "ESNext",
         "types": ["./typed-router.d.ts"],
         "paths": {
             "@/*": ["./src/*"]

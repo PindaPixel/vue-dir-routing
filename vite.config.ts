@@ -12,7 +12,7 @@ export default defineConfig({
     plugins: [
         VueRouter(routerOptions),
         vue(),
-        // Macros(),
+        Macros(),
     ],
     resolve: {
         alias: {
