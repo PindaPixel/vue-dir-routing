@@ -1,6 +1,5 @@
-import type VueRouter from "unplugin-vue-router/vite";
+import type { Options } from "unplugin-vue-router/options";
 
-type Options = Parameters<typeof VueRouter>[0];
 type RoutesFolder = NonNullable<Options>["routesFolder"];
 
 // [base url, source folder (case sensitive)]
@@ -9,7 +8,7 @@ const routerFolders: [string, string][] = [
     ["", "src/modules/Base"],
     // ["/", "src/Modules/Home"],
     ["/check/reports", "src/modules/Reports/Pages"],
-    // ["/account", "src/modules/Account/Pages"],
+    ["/account", "src/modules/Account/Pages"],
 ];
 
 const routesFolder: RoutesFolder = routerFolders
@@ -79,7 +78,7 @@ function resetLayout(filePath: string) {
 }
 
 export default {
-    routesFolder: [...routesFolder],
+    routesFolder,
     importMode(filepath) {
         return filepath.indexOf("Layout.vue") > -1 ||
             filepath.toLowerCase() === "@/router/components/notfound.vue"

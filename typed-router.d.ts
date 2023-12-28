@@ -42,10 +42,16 @@ declare module 'vue-router/auto/routes' {
     'base-layout': RouteRecordInfo<'base-layout', '/', Record<never, never>, Record<never, never>>,
     'home': RouteRecordInfo<'home', '/', Record<never, never>, Record<never, never>>,
     'not-found': RouteRecordInfo<'not-found', '/:index(.*)', { index: ParamValue<true> }, { index: ParamValue<false> }>,
+    'account-layout': RouteRecordInfo<'account-layout', '/account', Record<never, never>, Record<never, never>>,
+    'account': RouteRecordInfo<'account', '/account', Record<never, never>, Record<never, never>>,
+    'account/not-found': RouteRecordInfo<'account/not-found', '/account/:index(.*)', { index: ParamValue<true> }, { index: ParamValue<false> }>,
     'check/reports-layout': RouteRecordInfo<'check/reports-layout', '/check/reports', Record<never, never>, Record<never, never>>,
     'check/reports': RouteRecordInfo<'check/reports', '/check/reports', Record<never, never>, Record<never, never>>,
     'check/reports/not-found': RouteRecordInfo<'check/reports/not-found', '/check/reports/:index(.*)', { index: ParamValue<true> }, { index: ParamValue<false> }>,
     'check/reports/capacity': RouteRecordInfo<'check/reports/capacity', '/check/reports/capacity', Record<never, never>, Record<never, never>>,
+    'account/login-layout': RouteRecordInfo<'account/login-layout', '/account/login', Record<never, never>, Record<never, never>>,
+    'account/login': RouteRecordInfo<'account/login', '/account/login', Record<never, never>, Record<never, never>>,
+    'account/login/not-found': RouteRecordInfo<'account/login/not-found', '/account/login/:index(.*)', { index: ParamValue<true> }, { index: ParamValue<false> }>,
   }
 }
 

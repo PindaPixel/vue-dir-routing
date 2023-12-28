@@ -4,15 +4,14 @@ import RouterViewErrorBoundary from "@/router/components/RouterViewErrorBoundary
 
 <template>
     Hello from reports layout
-    <Suspense>
-        <RouterViewErrorBoundary>
-            <template #error="{error}">
-                {{ error.message }}
-            </template>
-        </RouterViewErrorBoundary>   
-        
-        <template #fallback>
-            Loading...
+    <RouterViewErrorBoundary>
+        <template #error="{ error }">
+            {{ error.message }}
         </template>
-    </Suspense>
+        <template #default="{ component }">
+            <Suspense>
+                <component :is="component" />
+            </Suspense>
+        </template>
+    </RouterViewErrorBoundary>
 </template>

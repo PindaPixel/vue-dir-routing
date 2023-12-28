@@ -1,1 +1,1 @@
-<template>Login laout <RouterView /></template>
+<template>Login layout <RouterView /></template>

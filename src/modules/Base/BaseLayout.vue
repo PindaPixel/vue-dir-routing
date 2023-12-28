@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink } from 'vue-router'
 import RouterViewErrorBoundary from '../../router/components/RouterViewErrorBoundary.vue';
+import HelloWorld from '@/components/HelloWorld.vue';
 </script>
 
 <template>
@@ -60,7 +61,6 @@ import RouterViewErrorBoundary from '../../router/components/RouterViewErrorBoun
         transform: translateX(-30px);
     }
 }
-
 
 ::view-transition-old(page-transition) {
     animation: 90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
