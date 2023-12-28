@@ -11,6 +11,9 @@ import RouterViewErrorBoundary from "@/router/components/RouterViewErrorBoundary
         <template #default="{ component }">
             <Suspense>
                 <component :is="component" />
+                <template #fallback>
+                    <p>Loading cat facts...</p>
+                </template>
             </Suspense>
         </template>
     </RouterViewErrorBoundary>

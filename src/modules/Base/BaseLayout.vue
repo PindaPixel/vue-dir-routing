@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router/auto'
 import RouterViewErrorBoundary from '../../router/components/RouterViewErrorBoundary.vue';
 import HelloWorld from '@/components/HelloWorld.vue';
 </script>
@@ -15,7 +15,8 @@ import HelloWorld from '@/components/HelloWorld.vue';
                 <RouterLink to="/">Home</RouterLink>
                 <RouterLink to="/account/login">Login</RouterLink>
                 <RouterLink to="/notfound">404</RouterLink>
-                <RouterLink to="/check/reports/capacity">Unauthorized</RouterLink>
+                <RouterLink :to="{ name: 'account' }">Unauthorized</RouterLink>
+                <RouterLink to="/check/reports/capacity">Cat facts</RouterLink>
             </nav>
         </div>
     </header>
