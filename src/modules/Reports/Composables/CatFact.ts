@@ -1,23 +1,27 @@
-import randomAtBuildTime from "@/macros/test" with { type: "macro" };
+import { ref } from 'vue';
 
-type CatFactResponse = {
+import { useFetch } from '@vueuse/core';
+
+import randomAtBuildTime from '@/macros/test' with { type: 'macro' };
+
+interface CatFactResponse {
     status: {
-        verified: boolean;
-        sentCount: number;
+        verified: boolean
+        sentCount: number
     }
-    text: string;
-    user: string;
-    source: string;
-    updatedAt: string;
-    type: string;
-    createdAt: string;
-    deleted: boolean;
-    used: boolean;
-}
+    text: string
+    user: string
+    source: string
+    updatedAt: string
+    type: string
+    createdAt: string
+    deleted: boolean
+    used: boolean
+};
 
 export default async function useCatFact() {
     const data: CatFactResponse[] = await (
-        await fetch("https://cat-fact.herokuapp.com/facts/")
+        await fetch('https://cat-fact.herokuapp.com/facts/')
     ).json();
 
     const index = Math.round(data.length * randomAtBuildTime());

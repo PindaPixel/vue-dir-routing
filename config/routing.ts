@@ -1,14 +1,14 @@
-import type { Options } from "unplugin-vue-router/options";
+import type { Options } from 'unplugin-vue-router/options';
 
-type RoutesFolder = NonNullable<Options>["routesFolder"];
+type RoutesFolder = NonNullable<Options>['routesFolder'];
 
 // [base url, source folder (case sensitive)]
 // all but base require a leading slash if it should be rendered in the base layout
 const routerFolders: [string, string][] = [
-    ["", "src/modules/Base"],
+    ['', 'src/modules/Base'],
     // ["/", "src/Modules/Home"],
-    ["/check/reports", "src/modules/Reports/Pages"],
-    ["/account", "src/modules/Account/Pages"],
+    ['/check/reports', 'src/modules/Reports/Pages'],
+    // ["/account", "src/modules/Account/Pages"],
 ];
 
 const routesFolder: RoutesFolder = routerFolders
@@ -16,38 +16,38 @@ const routesFolder: RoutesFolder = routerFolders
         return [
             {
                 src: srcFolder,
-                extensions: [".vue"],
-                filePatterns: ["**/*Layout", "**/*Layout@"],
+                extensions: ['.vue'],
+                filePatterns: ['**/*Layout', '**/*Layout@'],
                 path(filePath) {
                     return pathToUrlBaseTransform(
                         filePath,
                         srcFolder,
                         baseUrl,
-                    ).replace(/\/?\w+layout\.vue/g, ".vue");
+                    ).replace(/\/?\w+layout\.vue/g, '.vue');
                 },
             },
             {
                 src: srcFolder,
-                extensions: [".vue"],
-                filePatterns: ["**/*Page", "**/*Page@"],
+                extensions: ['.vue'],
+                filePatterns: ['**/*Page', '**/*Page@'],
                 path(filePath) {
                     return pathToUrlBaseTransform(
                         filePath,
                         srcFolder,
                         baseUrl,
-                    ).replace(/\/?\w+page/g, "/index");
+                    ).replace(/\/?\w+page/g, '/index');
                 },
             },
             {
                 src: srcFolder,
-                extensions: [".vue"],
-                filePatterns: ["**/*Layout", "**/*Layout@"],
+                extensions: ['.vue'],
+                filePatterns: ['**/*Layout', '**/*Layout@'],
                 path(filePath) {
                     return pathToUrlBaseTransform(
                         filePath,
                         srcFolder,
                         baseUrl,
-                    ).replace(/\/?\w+layout\.vue/g, "/[...index]");
+                    ).replace(/\/?\w+layout\.vue/g, '/[...index]');
                 },
             },
         ] satisfies RoutesFolder;
@@ -60,50 +60,53 @@ function pathToUrlBaseTransform(
     baseUrl: string,
 ): string {
     return resetLayout(
-        baseUrl +
-            filePath
-                .toLowerCase()
-                .slice(filePath.lastIndexOf(srcFolder) + srcFolder.length),
+        baseUrl
+        + filePath
+            .toLowerCase()
+            .slice(filePath.lastIndexOf(srcFolder) + srcFolder.length),
     );
 }
 
 function resetLayout(filePath: string) {
     const match = /(.+@)(.*)/g.exec(filePath);
 
-    if (!match) return filePath;
+    if (!match)
+        return filePath;
 
     const [, replace, rest] = match;
 
-    return replace.slice(1).replaceAll("@", "").replaceAll("/", ".") + rest;
+    return replace.slice(1).replaceAll('@', '').replaceAll('/', '.') + rest;
 }
 
 export default {
     routesFolder,
     importMode(filepath) {
-        return filepath.indexOf("Layout.vue") > -1 ||
-            filepath.toLowerCase() === "@/router/components/notfound.vue"
-            ? "sync"
-            : "async";
+        return filepath.includes('Layout.vue')
+            || filepath.toLowerCase() === '@/router/components/notfound.vue'
+            ? 'sync'
+            : 'async';
     },
     extendRoute(route) {
-        if (route.path !== ":index(.*)" || route.components.get("default"))
+        if (route.path !== ':index(.*)' || route.components.get('default'))
             return;
 
-        route.components.set("default", "@/router/components/NotFound.vue");
+        route.components.set('default', '@/router/components/NotFound.vue');
     },
     getRouteName(node) {
         const { components, path } = node.value;
 
-        const defaultComponent = components.get("default");
+        const defaultComponent = components.get('default');
 
-        if (defaultComponent && defaultComponent.indexOf("Layout.vue") > -1) {
-            if (path === "/") return "base-layout";
+        if (defaultComponent && defaultComponent.includes('Layout.vue')) {
+            if (path === '/')
+                return 'base-layout';
             // remove leading slash
-            return path.slice(1) + "-layout";
+            return `${path.slice(1)}-layout`;
         }
 
-        if (path === "/") return "home";
+        if (path === '/')
+            return 'home';
 
-        return path.slice(1).replace(":index(.*)", "not-found");
+        return path.slice(1).replace(':index(.*)', 'not-found');
     },
 } satisfies Options;

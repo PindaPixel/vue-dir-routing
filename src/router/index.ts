@@ -1,5 +1,5 @@
-import { createRouter, createWebHistory } from "vue-router/auto";
-import { viewTransitionSupported } from "../util/view-transition";
+import { createRouter, createWebHistory } from 'vue-router/auto';
+import { viewTransitionSupported } from '../util/view-transition';
 
 // routes: [
 //     {

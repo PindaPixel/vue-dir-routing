@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { NotFoundError, UnauthorizedError } from "@/router/error";
-import { ref, onErrorCaptured } from "vue";
-import { useRouter } from "vue-router/auto";
+import { onErrorCaptured, ref } from 'vue';
+import { useRouter } from 'vue-router/auto';
+
+import { NotFoundError, UnauthorizedError } from '@/router/error';
 
 type RouteError = UnauthorizedError | NotFoundError;
 
@@ -20,6 +21,7 @@ useRouter().afterEach(() => {
     error.value = undefined;
 });
 </script>
+
 <template>
     <RouterView v-if="!error" v-slot="{ Component }">
         <slot name="default" :component="Component">

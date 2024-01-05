@@ -1,22 +1,31 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router/auto'
-import RouterViewErrorBoundary from '../../router/components/RouterViewErrorBoundary.vue';
+import { RouterLink } from 'vue-router/auto';
+
 import HelloWorld from '@/components/HelloWorld.vue';
+import RouterViewErrorBoundary from '@/router/components/RouterViewErrorBoundary.vue';
 </script>
 
 <template>
     <header>
-        <img alt="Vue logo" :class="$style.logo" src="@/assets/logo.svg" width="125" height="125" />
+        <img alt="Vue logo" :class="$style.logo" src="@/assets/logo.svg" width="125" height="125">
 
         <div :class="$style.wrapper">
             <HelloWorld msg="You did it!" />
 
             <nav>
-                <RouterLink to="/">Home</RouterLink>
-                <RouterLink to="/account/login">Login</RouterLink>
-                <RouterLink to="/notfound">404</RouterLink>
-                <RouterLink :to="{ name: 'account' }">Unauthorized</RouterLink>
-                <RouterLink to="/check/reports/capacity">Cat facts</RouterLink>
+                <RouterLink to="/">
+                    Home
+                </RouterLink>
+                <RouterLink to="/account/login">
+                    Login
+                </RouterLink>
+                <RouterLink to="/notfound">
+                    404
+                </RouterLink>
+                <!-- <RouterLink :to="{ name: 'account' }">Unauthorized</RouterLink> -->
+                <RouterLink to="/check/reports/capacity">
+                    Cat facts
+                </RouterLink>
             </nav>
         </div>
     </header>
@@ -65,14 +74,14 @@ import HelloWorld from '@/components/HelloWorld.vue';
 
 ::view-transition-old(page-transition) {
     animation: 90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
-    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
-    
+        300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+
 }
 
 ::view-transition-new(page-transition) {
     animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
-    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
-    
+        300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+
 }
 
 header {
@@ -135,4 +144,5 @@ nav a:first-of-type {
         padding: 1rem 0;
         margin-top: 1rem;
     }
-}</style>
+}
+</style>

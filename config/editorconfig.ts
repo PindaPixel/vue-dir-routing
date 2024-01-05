@@ -1,20 +1,20 @@
-import editorConfig from "editorconfig";
-import { cwd } from "node:process";
+import { cwd } from 'node:process';
+import editorConfig from 'editorconfig';
 
 const parsedConfig = editorConfig.parseSync(cwd(), { unset: true });
 
 type EditorConfig = Required<{
     [Key in keyof editorConfig.KnownProps]: Exclude<
-        editorConfig.KnownProps[Key],
-        "unset"
+    editorConfig.KnownProps[Key],
+    'unset'
     >;
 }>;
 
 const defaults: EditorConfig = {
-    charset: "utf-8",
-    end_of_line: "lf",
+    charset: 'utf-8',
+    end_of_line: 'lf',
     indent_size: 4,
-    indent_style: "space",
+    indent_style: 'space',
     insert_final_newline: false,
     tab_width: 4,
     trim_trailing_whitespace: true,
@@ -22,5 +22,5 @@ const defaults: EditorConfig = {
 
 export default {
     ...defaults,
-    ...parsedConfig
+    ...parsedConfig,
 } as EditorConfig;
