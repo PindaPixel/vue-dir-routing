@@ -1,4 +1,5 @@
-interface ViewTransition {
+interface ViewTransition
+{
     /** A Promise that fulfills once the transition animation is finished, and the new page view is visible and interactive to the user. */
     finished: Promise<void>
     /** A Promise that fulfills once the pseudo-element tree is created and the transition animation is about to start. */
@@ -9,10 +10,12 @@ interface ViewTransition {
     skipTransition: () => void
 };
 
-interface ObjectWithStartViewTransition {
+interface ObjectWithStartViewTransition
+{
     startViewTransition: (updateDom: (() => void) | (() => Promise<void>)) => ViewTransition
 };
 
-export function viewTransitionSupported(document: Document): document is Document & ObjectWithStartViewTransition {
+export function viewTransitionSupported(document: Document): document is Document & ObjectWithStartViewTransition
+{
     return 'startViewTransition' in document;
 }

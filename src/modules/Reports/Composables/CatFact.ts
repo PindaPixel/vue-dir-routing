@@ -1,10 +1,7 @@
-import { ref } from 'vue';
-
-import { useFetch } from '@vueuse/core';
-
 import randomAtBuildTime from '@/macros/test' with { type: 'macro' };
 
-interface CatFactResponse {
+interface CatFactResponse
+{
     status: {
         verified: boolean
         sentCount: number
@@ -19,7 +16,8 @@ interface CatFactResponse {
     used: boolean
 };
 
-export default async function useCatFact() {
+export default async function useCatFact()
+{
     const data: CatFactResponse[] = await (
         await fetch('https://cat-fact.herokuapp.com/facts/')
     ).json();

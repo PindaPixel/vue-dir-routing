@@ -1,4 +1,5 @@
 import { cwd } from 'node:process';
+
 import editorConfig from 'editorconfig';
 
 const parsedConfig = editorConfig.parseSync(cwd(), { unset: true });

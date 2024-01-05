@@ -12,13 +12,15 @@ const routerFolders: [string, string][] = [
 ];
 
 const routesFolder: RoutesFolder = routerFolders
-    .map(([baseUrl, srcFolder]) => {
+    .map(([baseUrl, srcFolder]) =>
+    {
         return [
             {
                 src: srcFolder,
                 extensions: ['.vue'],
                 filePatterns: ['**/*Layout', '**/*Layout@'],
-                path(filePath) {
+                path(filePath)
+                {
                     return pathToUrlBaseTransform(
                         filePath,
                         srcFolder,
@@ -30,7 +32,8 @@ const routesFolder: RoutesFolder = routerFolders
                 src: srcFolder,
                 extensions: ['.vue'],
                 filePatterns: ['**/*Page', '**/*Page@'],
-                path(filePath) {
+                path(filePath)
+                {
                     return pathToUrlBaseTransform(
                         filePath,
                         srcFolder,
@@ -42,7 +45,8 @@ const routesFolder: RoutesFolder = routerFolders
                 src: srcFolder,
                 extensions: ['.vue'],
                 filePatterns: ['**/*Layout', '**/*Layout@'],
-                path(filePath) {
+                path(filePath)
+                {
                     return pathToUrlBaseTransform(
                         filePath,
                         srcFolder,
@@ -58,7 +62,8 @@ function pathToUrlBaseTransform(
     filePath: string,
     srcFolder: string,
     baseUrl: string,
-): string {
+): string
+{
     return resetLayout(
         baseUrl
         + filePath
@@ -67,7 +72,8 @@ function pathToUrlBaseTransform(
     );
 }
 
-function resetLayout(filePath: string) {
+function resetLayout(filePath: string)
+{
     const match = /(.+@)(.*)/g.exec(filePath);
 
     if (!match)
@@ -80,24 +86,28 @@ function resetLayout(filePath: string) {
 
 export default {
     routesFolder,
-    importMode(filepath) {
+    importMode(filepath)
+    {
         return filepath.includes('Layout.vue')
             || filepath.toLowerCase() === '@/router/components/notfound.vue'
             ? 'sync'
             : 'async';
     },
-    extendRoute(route) {
+    extendRoute(route)
+    {
         if (route.path !== ':index(.*)' || route.components.get('default'))
             return;
 
         route.components.set('default', '@/router/components/NotFound.vue');
     },
-    getRouteName(node) {
+    getRouteName(node)
+    {
         const { components, path } = node.value;
 
         const defaultComponent = components.get('default');
 
-        if (defaultComponent && defaultComponent.includes('Layout.vue')) {
+        if (defaultComponent && defaultComponent.includes('Layout.vue'))
+        {
             if (path === '/')
                 return 'base-layout';
             // remove leading slash

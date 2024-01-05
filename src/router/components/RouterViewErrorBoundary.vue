@@ -8,8 +8,10 @@ type RouteError = UnauthorizedError | NotFoundError;
 
 const error = ref<RouteError | undefined>();
 
-onErrorCaptured((e) => {
-    if (e instanceof UnauthorizedError || e instanceof NotFoundError) {
+onErrorCaptured((e) =>
+{
+    if (e instanceof UnauthorizedError || e instanceof NotFoundError)
+    {
         error.value = e;
         return false;
     }
@@ -17,7 +19,8 @@ onErrorCaptured((e) => {
     return true;
 });
 
-useRouter().afterEach(() => {
+useRouter().afterEach(() =>
+{
     error.value = undefined;
 });
 </script>
