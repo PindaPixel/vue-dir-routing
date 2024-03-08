@@ -22,9 +22,14 @@ import RouterViewErrorBoundary from '@/router/components/RouterViewErrorBoundary
                 <RouterLink to="/notfound">
                     404
                 </RouterLink>
-                <!-- <RouterLink :to="{ name: 'account' }">Unauthorized</RouterLink> -->
+                <RouterLink :to="{ name: 'account' }">
+                    Unauthorized
+                </RouterLink>
                 <RouterLink to="/check/reports/capacity">
                     Cat facts
+                </RouterLink>
+                <RouterLink :to="{ name: 'nested/:resource/:id?', params: { resource: 'One' } }">
+                    Nested test
                 </RouterLink>
             </nav>
         </div>

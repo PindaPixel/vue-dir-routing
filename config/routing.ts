@@ -6,9 +6,10 @@ type RoutesFolder = NonNullable<Options>['routesFolder'];
 // all but base require a leading slash if it should be rendered in the base layout
 const routerFolders: [string, string][] = [
     ['', 'src/modules/Base'],
-    // ["/", "src/Modules/Home"],
+    ['/', 'src/Modules/Home'],
     ['/check/reports', 'src/modules/Reports/Pages'],
-    // ["/account", "src/modules/Account/Pages"],
+    ['/account', 'src/modules/Account/Pages'],
+    ['/nested', 'src/modules/Nested/Pages'],
 ];
 
 const routesFolder: RoutesFolder = routerFolders
