@@ -29,6 +29,8 @@ const routesFolder: RoutesFolder = routerFolders
                     ).replace(/\/?\w+layout\.vue/g, '.vue');
                 },
             },
+            // The difference with layouts and pages in the configuration is that pages end with /index.vue
+            // This tells unplugin-vue-router that the route cannot contain child routes (which are rendered in a RouterView component)
             {
                 src: srcFolder,
                 extensions: ['.vue'],
@@ -39,9 +41,17 @@ const routesFolder: RoutesFolder = routerFolders
                         filePath,
                         srcFolder,
                         baseUrl,
-                    ).replace(/\/?\w+page/g, '/index');
+                    ).replace(/\/?\w+page/g, '/index')
+                        .replace(/(\[.+\]\+?)\/index/g, "$1");
+                    // The second replace makes sure that dynamic routes are not nested an extra level
+                    // See the discussion below for details why we do not want this
+                    // https://github.com/vuejs/router/discussions/2168#discussioncomment-8788335
                 },
             },
+            // These are catch-all routes which will trigger when no other route was found under a layout component
+            // Below in the extendRoute function we make sure that the NotFound component is rendered on this catch-all route
+            // which simply throws a NotFoundException.
+            // This enables layout components to implement a 404 using onErrorCaptured
             {
                 src: srcFolder,
                 extensions: ['.vue'],
@@ -82,10 +92,13 @@ function resetLayout(filePath: string)
 
     const [, replace, rest] = match;
 
+    // Using a dot instead of a slash as path divider tells unplugin-vue router to hoist the route to the root of the route tree,
+    // meaning it has no parent layout anymore.
+    // We replace all slashes up until the @ symbol, meaning route nesting will be enabled once again past this point
     return replace.slice(1).replaceAll('@', '').replaceAll('/', '.') + rest;
 }
 
-export default {
+const options: Options = {
     routesFolder,
     importMode(filepath)
     {
@@ -96,13 +109,19 @@ export default {
     },
     extendRoute(route)
     {
-        if (route.path !== ':index(.*)' || route.components.get('default'))
+        // Render an empty component at catch-all routes that simply throws a NotFound error
+        // which can be caught using onErrorCaptured in a parent component.
+        if (route.path !== ':index(.*)')
             return;
 
         route.components.set('default', '@/router/components/NotFound.vue');
     },
     getRouteName(node)
     {
+        // Customising route names has no real function
+        // We use the name of the route to define type-safe links (RouterLink's `to` prop)
+        // Giving them a custom name this way just makes it easier to distinguish
+        // layouts from pages, since you shouldn't link to a layout
         const { components, path } = node.value;
 
         const defaultComponent = components.get('default');
@@ -120,4 +139,6 @@ export default {
 
         return path.slice(1).replace(':index(.*)', 'not-found');
     },
-} satisfies Options;
+};
+
+export default options;

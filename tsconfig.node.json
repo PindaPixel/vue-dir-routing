@@ -3,8 +3,13 @@
     "compilerOptions": {
         "composite": true,
         "module": "ESNext",
+        "lib": [
+            "ESNext"
+        ],
         "moduleResolution": "Bundler",
-        "types": ["node"]
+        "types": [
+            "node"
+        ]
     },
     "include": [
         "vite.config.*",
