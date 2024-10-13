@@ -3,6 +3,7 @@
         "composite": true,
         "baseUrl": ".",
         "module": "ESNext",
+        "target": "ESNext",
         "moduleResolution": "Bundler",
         "paths": {
             "@/*": [
